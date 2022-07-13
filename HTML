@@ -1,0 +1,174 @@
+
+<html>
+
+
+    <head>
+
+        <title>
+
+            Zoe's Project
+
+        </title>
+
+
+
+
+
+    </head>
+
+
+    
+    <body style="font-family: Arial, Helvetica, sans-serif;">
+        <script>
+
+            function SubmitForm() {
+
+                var statusdiv = document.getElementById('statusdiv');
+
+
+                var studentfirstname = document.getElementById('studentfirstname_id');
+                var studentlastname = document.getElementById('studentlastname_id');
+                var studentphonenumber = document.getElementById('studentphonenumber_id');
+                var studentnotes = document.getElementById('studentnotes_id');
+
+                statusdiv.innerHTML = '<br>Student First Name: ' + studentfirstname.value + ' <br>Student Last Name: ' + studentlastname.value + ' <br>Student Phone Number: ' + studentphonenumber.value + ' <br>Notes: ' + studentnotes.value;
+
+                // FUTURE USE: Add Backend Vonage API TO COMMUNICATE TO SMS SERVER 
+
+                // alert('hello world ' + studentfirstname.value );
+
+            }
+
+
+
+
+
+        </script>
+
+
+                   <div style="border:1px solid blue; font-weight: bold; text-align: center; font-size:25px; padding:20px; width:30%; margin:auto; ">
+
+
+                    Office Form
+
+
+
+                    </div>
+
+
+                    <div id="statusdiv" style="background-color:green; color:white; padding:20px; text-align: center; font-size:25px; width:60%; border-radius:7px; margin-top:10px; margin-bottom:10px; margin-left: auto; margin-right: auto; ">
+
+                        Current Status
+
+                    </div>
+
+
+                    <form id="scheduleform" name="scheduleform">
+
+
+
+
+
+
+
+                    <div style="display: flex; align-items: stretch; align-content: center;">
+                        <div style="display: inline-block; border:1px solid red; width: 35%; ">
+
+                            <div>
+
+                                <img src="calendar.jpg" />
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div style="display: inline-block; border:1px solid green; width: 60%;">
+
+                            <div>
+
+                                    Prof Name
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div>
+
+                            Current Date
+
+                    </div>
+
+
+
+                    <div>
+
+                            Student First Name: <input type="text" name="studentfirstname" id="studentfirstname_id" />
+
+                    </div>
+
+                    <div>
+
+                            Student Last Name: <input type="text" name="studentlastname" id="studentlastname_id" />
+
+                    </div>
+
+                    <div>
+
+                            Student Phone Number: <input type="text" name="studentphonenumber" id="studentphonenumber_id" />
+
+                    </div>
+
+                    <div>
+
+                            Available Times
+
+                    </div>
+
+                    <div>
+
+                            Comments, Questions, Notes... <textarea name="studentnotes" id="studentnotes_id"> </textarea>
+
+                    </div>
+
+
+                    <div>
+
+                        <button type="button" name="booknowbutton" onClick="SubmitForm();"> Book Now </button>
+
+                    </div>
+
+
+
+
+                    </form>
+
+    
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
