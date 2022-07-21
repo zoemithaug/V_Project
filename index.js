@@ -24,8 +24,8 @@ webserver.use(bodyParser.urlencoded({ extended: true }));
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('reservations.db');
 
-let API_Key = process.env.API_KEY;
-let API_Secret = process.env.API_SECRET;
+const API_Key = process.env.API_KEY;
+const API_Secret = process.env.API_SECRET;
  
 webserver.listen(3000);
 
@@ -151,11 +151,14 @@ function PostSchedule() {
                         // res.send(req.body);
                         // res.redirect('/');
 
+                        //Build SQL string --> insert string to add record to appointments table 
                         var sqlstring = 'INSERT INTO Appointments (appointmentdate, appointmenttime, professorname, studentfirstname, studentlastname, studentphonenumber, studentnotes) ' +
                                         'VALUES (?, ?, ?, ?, ?, ?, ?)';
 
+                        //Execute SQL string into database (Using paramaterized queries to prevent SQL injection)
                         db.run(sqlstring, appointmentdate, appointmenttime, professorname, studentfirstname, studentlastname, studentphonenumber, studentnotes);           
-
+                        //For testing purposes query all records in appointments table and display to console
+                        //The last record shown should be the record we just inserted 
                         db.each("SELECT appointmentdate, appointmenttime, professorname, studentfirstname, studentlastname info FROM Appointments", (err, row) => {
                             console.log(row.appointmentdate + ": " + row.appointmenttime + ":" + row.professorname);
                             }); 
