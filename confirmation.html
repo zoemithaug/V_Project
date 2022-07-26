@@ -1,253 +1,135 @@
 <html>
-
-
-<head>
-
-<title>
-
-    Your Reservation has been confirmed 
-
-</title>
-
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
-<style>
-
-
-h1{
-
-    font-size:27px; 
-    width:70%;
-    padding:10px;
-    text-align:center;
-    margin:auto;
-    margin-bottom:20px;
-    background-image: linear-gradient(to bottom, lightgreen, white);
-
-}
-
-.FormTextBox{
-
-    display:flex; 
-    align-items:center;
-    text-align:center; 
-    margin:auto; 
-    width:95%; 
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-
-.FormTextBox div{
-    width:50%;
-    text-align:left;
-    padding:7px;
-}
-
-
-.FormTextAreaBox{
-    text-align:center; 
-    margin:auto; 
-    width:95%; 
-    font-weight:bold;
-    margin-bottom:10px;
-
-
-}
-
-.FormTextAreaBox div{
-    width:100%;
-    text-align:center;
-    padding:7px;
-}
-
-.BigButton{
-    cursor:pointer;
-    background-color:lightgreen;
-    color:black; 
-    padding:15px; 
-    font-size:20px; 
-    border-radius:7px; 
-    border:1px solid black;
-    text-decoration: none;
-  /*  background-image: linear-gradient(to bottom, lightgreen, white); */
-
-
-}
-
-.BigButton:hover{
-    background-color: white; color: black;
-}
-
-.readonlydata{
-
-    font-weight:normal;
-
-
-
-}
-
-</style>
-
-
-
-
-</head>
-
-
-
-<body style="font-family: Arial, Helvetica, sans-serif;">
-
-
-
-    <h1>
-
+    <head>
+    <title>
         Your Reservation has been confirmed 
-
-
-    </h1>
-
-
-
-
-
-
-
-<form id="scheduleform" name="scheduleform" method="post" action="/schedule">
-
-    <div id="FormInfo">
-
-        <div class="FormTextBox">
-
-
-            <div style="text-align:right;">
-
-                 Date for Reservation:
-
-            </div>
-
-            <div class="readonlydata">
-
-        
-                {{AppointmentDate}}
-
-               
-
-            </div>
-
-
-        </div> <!--FormTextBox-->
-
-        <div class="FormTextBox">
-
-
-            <div style="text-align: right;">
-
-                Appointment Time:
-
-            </div>
-
-            <div class="readonlydata">
-               
-                {{AppointmentTime}}
-
-            </div>
-
-
-        </div> <!--FormTextAreaBox-->
- 
-
-        <div class="FormTextBox">
-
-
-            <div style="text-align:right;">
-                 Professor:
-
-            </div>
-
-            <div class="readonlydata">
-    
-               {{ProfessorName}}
-
-
-
-            </div>
-
-
-        </div> <!--FormTextBox-->
-
-
-       
-
-        <div class="FormTextBox">
-
-
-            <div style="text-align:right;">
-                Student Name:
-
-            </div>
-
-            <div class="readonlydata">
-                {{StudentName}}
-
-            </div>
-
-
-        </div> <!--FormTextBox-->
-
-
-        <div class="FormTextBox">
-
-
-            <div style="text-align:right;">
-                Student Phone Number:
-
-            </div>
-
-            <div class="readonlydata">
-
-                {{StudentPhoneNumber}}
-
-            </div>
-
-
-        </div> <!--FormTextBox-->
-
-        <div class="FormTextAreaBox">
-
-
-            <div>
-                Comments, Questions, Notes...
-
-            </div>
-
-            <div class="readonlydata">
-                
-                {{StudentNotes}}
-
-
-            </div>
-
-
-        </div> <!--FormTextAreaBox-->
-
-
-     <div style="text-align: center; margin-top:20px; ">
-    
-        <a href="/" class="BigButton">
-            Return to Reservation Form
-        </a>
-    
-    
-    </div>
-
-    </div> <!--FormInfo-->
-
-</form>
-
-</body>
-
+    </title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+    h1{
+        font-size:27px; 
+        width:70%;
+        padding:10px;
+        text-align:center;
+        margin:auto;
+        margin-bottom:20px;
+        background-image: linear-gradient(to bottom, lightgreen, white);
+    }
+
+    .FormTextBox{
+        display:flex; 
+        align-items:center;
+        text-align:center; 
+        margin:auto; 
+        width:95%; 
+        font-weight:bold;
+        margin-bottom:10px;
+    }
+
+    .FormTextBox div{
+        width:50%;
+        text-align:left;
+        padding:7px;
+    }
+
+    .FormTextAreaBox{
+        text-align:center; 
+        margin:auto; 
+        width:95%; 
+        font-weight:bold;
+        margin-bottom:10px;
+    }
+
+    .FormTextAreaBox div{
+        width:100%;
+        text-align:center;
+        padding:7px;
+    }
+
+    .BigButton{
+        cursor:pointer;
+        background-color:lightgreen;
+        color:black; 
+        padding:15px; 
+        font-size:20px; 
+        border-radius:7px; 
+        border:1px solid black;
+        text-decoration: none;
+
+    }
+
+    .BigButton:hover{
+        background-color: white; color: black;
+    }
+
+    .readonlydata{
+        font-weight:normal;
+    }
+
+    </style>
+    </head>
+    <body style="font-family: Arial, Helvetica, sans-serif;">
+        <h1>
+            Your Reservation has been confirmed 
+        </h1>
+    <form id="scheduleform" name="scheduleform" method="post" action="/schedule">
+        <div id="FormInfo">
+            <div class="FormTextBox">
+                <div style="text-align:right;">
+                    Date for Reservation:
+                </div>
+                <div class="readonlydata">
+                    {{AppointmentDate}}
+                </div>
+            </div> <!--FormTextBox-->
+            <div class="FormTextBox">
+                <div style="text-align: right;">
+                    Appointment Time:
+                </div>
+                <div class="readonlydata">
+                    {{AppointmentTime}}
+                </div>
+            </div> <!--FormTextAreaBox-->
+            <div class="FormTextBox">
+                <div style="text-align:right;">
+                    Professor:
+                </div>
+                <div class="readonlydata">
+                {{ProfessorName}}
+                </div>
+            </div> <!--FormTextBox-->
+            <div class="FormTextBox">
+                <div style="text-align:right;">
+                    Student Name:
+                </div>
+                <div class="readonlydata">
+                    {{StudentName}}
+                </div>
+            </div> <!--FormTextBox-->
+            <div class="FormTextBox">
+                <div style="text-align:right;">
+                    Student Phone Number:
+                </div>
+                <div class="readonlydata">
+                    {{StudentPhoneNumber}}
+                </div>
+            </div> <!--FormTextBox-->
+            <div class="FormTextAreaBox">
+                <div>
+                    Comments, Questions, Notes...
+                </div>
+                <div class="readonlydata">
+                    {{StudentNotes}}
+                </div>
+            </div> <!--FormTextAreaBox-->
+        <div style="text-align: center; margin-top:20px; ">
+            <a href="/" class="BigButton">
+                Return to Reservation Form
+            </a>
+        </div>
+        </div> <!--FormInfo-->
+    </form>
+    </body>
 </html>
