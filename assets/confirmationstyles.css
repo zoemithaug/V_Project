@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 27px;
+  width: 70%;
+  padding: 10px;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to bottom, lightgreen, white);
+}
+
+.FormTextBox {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  width: 95%;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.FormTextBox div {
+  width: 50%;
+  text-align: left;
+  padding: 7px;
+}
+
+.FormTextAreaBox {
+  text-align: center;
+  margin: auto;
+  width: 95%;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.FormTextAreaBox div {
+  width: 100%;
+  text-align: center;
+  padding: 7px;
+}
+
+.BigButton {
+  cursor: pointer;
+  background-color: lightgreen;
+  color: black;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 7px;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+.BigButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.readonlydata {
+  font-weight: normal;
+}
+
+#alignRight {
+  text-align: right;
+  justify-content: right;
+  align-items: right;
+  text-align: right;
+}
+
+#returnButton {
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Your Reservation has been confirmed</title>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/assets/confirmationstyles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  </head>
+  <body>
+    <h1>Your Reservation has been confirmed</h1>
+    <form
+      id="scheduleform"
+      name="scheduleform"
+      method="post"
+      action="/schedule"
+    >
+      <div id="FormInfo">
+        <div class="FormTextBox">
+          <div id="alignRight">Date for Reservation:</div>
+          <div class="readonlydata">{{AppointmentDate}}</div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Appointment Time:</div>
+          <div class="readonlydata">{{AppointmentTime}}</div>
+        </div>
+        <!--FormTextAreaBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Professor:</div>
+          <div class="readonlydata">{{ProfessorName}}</div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Student Name:</div>
+          <div class="readonlydata">{{StudentName}}</div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Student Phone Number:</div>
+          <div class="readonlydata">{{StudentPhoneNumber}}</div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextAreaBox">
+          <div>Comments, Questions, Notes...</div>
+          <div class="readonlydata">{{StudentNotes}}</div>
+        </div>
+        <!--FormTextAreaBox-->
+        <div id="returnButton">
+          <a href="/" class="BigButton"> Return to Reservation Form </a>
+        </div>
+      </div>
+      <!--FormInfo-->
+    </form>
+  </body>
+</html>

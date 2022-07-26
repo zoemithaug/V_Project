@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>Office Hours Reservation</title>
+    <link type="text/css" rel="stylesheet" href="/assets/indexstyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  </head>
+
+  <body>
+    <h1>Office Hours Reservation Form</h1>
+    <div id="statusdiv">Current Status</div>
+    <form
+      id="scheduleform"
+      name="scheduleform"
+      method="post"
+      action="/schedule"
+    >
+      <div id="FormInfo">
+        <div class="FormTextBox">
+          <div id="alignRight">Select Date for Reservation:</div>
+          <div>
+            <script>
+              $(function () {
+                $("#datepicker").datepicker();
+              });
+            </script>
+            <input
+              type="text"
+              name="AppointmentDate"
+              value="7/15/2022"
+              id="datepicker"
+            />
+          </div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Select Professor:</div>
+          <div>
+            <select name="ProfessorName">
+              <option value="Professor Nimoy">Professor Nimoy</option>
+              <option value="Dr. Rory">Dr. Rory</option>
+              <option value="Professor Amanda">Professor Amanda</option>
+              <option value="Professor Dwane">Professor Dwane</option>
+              <option value="Dr. Zach">Dr. Zach</option>
+            </select>
+          </div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextAreaBox">
+          <div>Choose Appointment Time:</div>
+          <div>
+            <label>
+              <input type="radio" name="AppointmentTime" value="8" /> 8:00 AM
+            </label>
+            <label>
+              <input type="radio" name="AppointmentTime" value="9" /> 9:00 AM
+            </label>
+            <label>
+              <input type="radio" name="AppointmentTime" value="10" /> 10:00 AM
+            </label>
+            <label>
+              <input type="radio" name="AppointmentTime" value="11" /> 11:00 AM
+            </label>
+          </div>
+        </div>
+        <!--FormTextAreaBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Student First Name:</div>
+          <div>
+            <input
+              type="text"
+              name="studentfirstname"
+              id="studentfirstname_id"
+            />
+          </div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Student Last Name:</div>
+          <div>
+            <input type="text" name="studentlastname" id="studentlastname_id" />
+          </div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextBox">
+          <div id="alignRight">Student Phone Number:</div>
+          <div>
+            <input
+              type="text"
+              name="studentphonenumber"
+              id="studentphonenumber_id"
+            />
+          </div>
+        </div>
+        <!--FormTextBox-->
+        <div class="FormTextAreaBox">
+          <div>Comments, Questions, Notes...</div>
+          <div>
+            <textarea
+              name="studentnotes"
+              id="studentnotes_id"
+              style="width: 300px; height: 100px"
+            >
+            </textarea>
+          </div>
+        </div>
+        <!--FormTextAreaBox-->
+        <div style="text-align: center">
+          <button type="submit" name="booknowbutton" class="BigButton">
+            Book Now
+          </button>
+        </div>
+      </div>
+      <!--FormInfo-->
+    </form>
+  </body>
+</html>
