@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const nunjucks = require("nunjucks");
 const webserver = express();
-const Vonage = require("@vonage/server-sdk");
+const Vonage = require('@vonage/server-sdk')
+const SMS = require('@vonage/server-sdk/lib/Messages/SMS');
 
 // ✅ Do this if using JavaScript
 const fetch = (...args) =>
@@ -97,21 +98,14 @@ function PostSchedule() {
         ErrorMessage: ErrorMessage,
       });
     } else {
-      vonage.message.sendSms(
-        process.env.FROM_PHONE_NUMBER,
-        studentphonenumber,
-        message,
-        (err, responseData) => {
+
+      vonage.messages.send(
+        new SMS(message, studentphonenumber, process.env.FROM_PHONE_NUMBER),
+        (err, data) => {
           if (err) {
-            console.log(err);
+            console.error(err);
           } else {
-            if (responseData.messages[0]["status"] === "0") {
-              console.log("Message sent successfully.");
-            } else {
-              console.log(
-                `Message failed with error: ${responseData.messages[0]["error-text"]}`
-              );
-            }
+            console.log(data.message_uuid);
           }
         }
       );
@@ -132,6 +126,7 @@ function PostSchedule() {
         studentphonenumber,
         studentnotes
       );
+      
       // For testing purposes query all records in appointments table and display to console
       // The last record shown should be the record we just inserted
       db.each(
