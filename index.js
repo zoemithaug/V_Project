@@ -1,26 +1,30 @@
 require("dotenv").config();
 const express = require("express");
 const nunjucks = require("nunjucks");
-const bodyParser = require("body-parser");
 const webserver = express();
+const Vonage = require('@vonage/server-sdk')
+const SMS = require('@vonage/server-sdk/lib/Messages/SMS');
 
 // ✅ Do this if using JavaScript
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-webserver.use('/assets', express.static('assets'))
+webserver.use("/assets", express.static("assets"));
 
 nunjucks.configure("html", { autoescape: false, express: webserver });
 
-// Body Parser Set Up
-webserver.use(bodyParser.urlencoded({ extended: true }));
+webserver.use(express.json());
+
+webserver.use(express.urlencoded({ extended: true }));
 
 // Global database
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("reservations.db");
 
-const API_Key = process.env.API_KEY;
-const API_Secret = process.env.API_SECRET;
+const vonage = new Vonage({
+  apiKey: process.env.VONAGE_API_KEY,
+  apiSecret: process.env.VONAGE_API_SECRET,
+});
 
 webserver.listen(3000);
 
@@ -60,15 +64,6 @@ function PostSchedule() {
       " you have successfully booked your appointment! Here are your additional notes: " +
       studentnotes;
 
-    // JSON info object -> posted to Vonage -> so Vonage can send text
-    let todo = {
-      from: "18338510989",
-      text: message,
-      to: studentphonenumber,
-      api_key: API_Key,
-      api_secret: API_Secret,
-    };
-
     let ValidationCheck = true; // Assume success, prove otherwise
     let ErrorMessage = "";
 
@@ -103,14 +98,17 @@ function PostSchedule() {
         ErrorMessage: ErrorMessage,
       });
     } else {
-      // Posting data to Vonage & receiving success or failure
-      fetch("https://rest.nexmo.com/sms/json", {
-        method: "POST",
-        body: JSON.stringify(todo),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((json) => console.log(json));
+
+      vonage.messages.send(
+        new SMS(message, studentphonenumber, process.env.FROM_PHONE_NUMBER),
+        (err, data) => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log(data.message_uuid);
+          }
+        }
+      );
 
       // Build SQL string --> insert string to add record to appointments table
       let sqlstring =
@@ -128,6 +126,7 @@ function PostSchedule() {
         studentphonenumber,
         studentnotes
       );
+      
       // For testing purposes query all records in appointments table and display to console
       // The last record shown should be the record we just inserted
       db.each(
