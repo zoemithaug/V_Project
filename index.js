@@ -1,26 +1,29 @@
 require("dotenv").config();
 const express = require("express");
 const nunjucks = require("nunjucks");
-const bodyParser = require("body-parser");
 const webserver = express();
+const Vonage = require("@vonage/server-sdk");
 
 // ✅ Do this if using JavaScript
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-webserver.use('/assets', express.static('assets'))
+webserver.use("/assets", express.static("assets"));
 
 nunjucks.configure("html", { autoescape: false, express: webserver });
 
-// Body Parser Set Up
-webserver.use(bodyParser.urlencoded({ extended: true }));
+webserver.use(express.json());
+
+webserver.use(express.urlencoded({ extended: true }));
 
 // Global database
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("reservations.db");
 
-const API_Key = process.env.API_KEY;
-const API_Secret = process.env.API_SECRET;
+const vonage = new Vonage({
+  apiKey: process.env.VONAGE_API_KEY,
+  apiSecret: process.env.VONAGE_API_SECRET,
+});
 
 webserver.listen(3000);
 
@@ -60,15 +63,6 @@ function PostSchedule() {
       " you have successfully booked your appointment! Here are your additional notes: " +
       studentnotes;
 
-    // JSON info object -> posted to Vonage -> so Vonage can send text
-    let todo = {
-      from: "18338510989",
-      text: message,
-      to: studentphonenumber,
-      api_key: API_Key,
-      api_secret: API_Secret,
-    };
-
     let ValidationCheck = true; // Assume success, prove otherwise
     let ErrorMessage = "";
 
@@ -103,14 +97,24 @@ function PostSchedule() {
         ErrorMessage: ErrorMessage,
       });
     } else {
-      // Posting data to Vonage & receiving success or failure
-      fetch("https://rest.nexmo.com/sms/json", {
-        method: "POST",
-        body: JSON.stringify(todo),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((json) => console.log(json));
+      vonage.message.sendSms(
+        process.env.FROM_PHONE_NUMBER,
+        studentphonenumber,
+        message,
+        (err, responseData) => {
+          if (err) {
+            console.log(err);
+          } else {
+            if (responseData.messages[0]["status"] === "0") {
+              console.log("Message sent successfully.");
+            } else {
+              console.log(
+                `Message failed with error: ${responseData.messages[0]["error-text"]}`
+              );
+            }
+          }
+        }
+      );
 
       // Build SQL string --> insert string to add record to appointments table
       let sqlstring =
